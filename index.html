@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Pokedex</title>
+  </head>
+  <body>
+    <h1>Pokedex</h1>
+    
+    <!-- Barra de busca -->
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Buscar Pokémon por nome ou número...">
+    </div>
+
+    <!-- Filtros por tipo -->
+    <div class="filter-container">
+      <button class="filter-btn active" data-type="all">Todos</button>
+      <button class="filter-btn" data-type="fire">Fogo</button>
+      <button class="filter-btn" data-type="water">Água</button>
+      <button class="filter-btn" data-type="grass">Planta</button>
+      <button class="filter-btn" data-type="electric">Elétrico</button>
+      <button class="filter-btn" data-type="psychic">Psíquico</button>
+      <button class="filter-btn" data-type="bug">Inseto</button>
+      <button class="filter-btn" data-type="rock">Pedra</button>
+      <button class="filter-btn" data-type="ghost">Fantasma</button>
+      <button class="filter-btn" data-type="dragon">Dragão</button>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="loading">Carregando Pokémon...</div>
+
+    <!-- Container dos Pokémon -->
+    <div class="poke-container" id="poke-container"></div>
+
+    <!-- Botão para carregar mais -->
+    <div class="load-more-container">
+      <button id="load-more-btn" class="load-more-btn">Carregar Mais Pokémon</button>
+    </div>
+
+    <!-- Modal de detalhes -->
+    <div id="pokemon-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <!-- Design inspired by this Dribbble shot: https://dribbble.com/shots/5611109--Pokemon -->
+    <script src="script.js"></script>
+  </body>
+</html>

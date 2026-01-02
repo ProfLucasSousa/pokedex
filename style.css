@@ -1,0 +1,490 @@
+/* Importa a fonte Lato do Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
+
+/* Reset básico: garante que padding e border não quebrem o layout */
+* {
+  box-sizing: border-box;
+}
+
+/* ===== Estilo global da página ===== */
+body {
+  /* Fundo em gradiente */
+  background: #efefbb;
+  background: linear-gradient(to right, #d4d3dd, #efefbb);
+
+  /* Fonte padrão */
+  font-family: 'Lato', sans-serif;
+
+  /* Centraliza tudo vertical e horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Título principal */
+h1 {
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  font-size: 3em;
+
+  /* Sombra leve pra dar profundidade */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ===== Barra de busca ===== */
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+/* Campo de input da busca */
+#search-input {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 1em;
+
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+
+  /* Transição suave em foco */
+  transition: all 0.3s ease;
+  background: white;
+}
+
+/* Efeito quando o input recebe foco */
+#search-input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.2);
+}
+
+/* ===== Filtros por tipo ===== */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+
+  margin-bottom: 30px;
+  max-width: 900px;
+}
+
+/* Botão de filtro */
+.filter-btn {
+  padding: 10px 20px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 20px;
+
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+
+/* Hover do botão de filtro */
+.filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Botão de filtro ativo */
+.filter-btn.active {
+  background: #6c63ff;
+  color: white;
+  border-color: #6c63ff;
+}
+
+/* ===== Loading ===== */
+.loading {
+  display: none;
+  font-size: 1.2em;
+  color: #6c63ff;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+/* ===== Container dos cards ===== */
+.poke-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+
+  margin: 0 auto;
+  max-width: 1200px;
+  gap: 15px;
+}
+
+/* ===== Card do Pokémon ===== */
+.pokemon {
+  background-color: #eee;
+  border-radius: 15px;
+
+  /* Sombra padrão do card */
+  box-shadow: 0 5px 20px rgba(100, 100, 100, 0.3);
+
+  padding: 20px;
+  text-align: center;
+  width: 180px;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efeito hover no card */
+.pokemon:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(100, 100, 100, 0.5);
+}
+
+/* Brilho diagonal decorativo */
+.pokemon::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+}
+
+/* Animação do brilho no hover */
+.pokemon:hover::before {
+  top: -100%;
+  right: -100%;
+}
+
+/* Container da imagem do Pokémon */
+.pokemon .img-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+
+  width: 120px;
+  height: 120px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagem do Pokémon */
+.pokemon .img-container img {
+  max-width: 90%;
+  transition: transform 0.3s ease;
+}
+
+/* Zoom da imagem no hover */
+.pokemon:hover .img-container img {
+  transform: scale(1.2);
+}
+
+/* Informações do card */
+.pokemon .info {
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Número do Pokémon */
+.pokemon .info .number {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 10px;
+
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+/* Nome do Pokémon */
+.pokemon .info .name {
+  margin: 15px 0 10px;
+  letter-spacing: 1px;
+  font-size: 1.2em;
+}
+
+/* Container dos tipos */
+.pokemon .types {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* Badge de tipo */
+.type-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+
+  font-size: 0.75em;
+  font-weight: bold;
+  color: white;
+
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  text-transform: capitalize;
+}
+
+/* ===== Botão "Carregar Mais" ===== */
+.load-more-container {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.load-more-btn {
+  padding: 15px 40px;
+  font-size: 1.1em;
+  font-weight: bold;
+
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Hover do botão */
+.load-more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Clique do botão */
+.load-more-btn:active {
+  transform: translateY(-1px);
+}
+
+/* ===== Modal ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0,0,0,0.6);
+  animation: fadeIn 0.3s;
+}
+
+/* Animação de fade do fundo */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 0;
+
+  border-radius: 20px;
+  width: 90%;
+  max-width: 700px;
+
+  box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+  animation: slideIn 0.3s;
+
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Animação de entrada do modal */
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Botão de fechar */
+.close {
+  color: #333;
+  float: right;
+  font-size: 35px;
+  font-weight: bold;
+
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+}
+
+/* Cabeçalho do modal */
+.modal-header {
+  padding: 30px;
+  border-radius: 20px 20px 0 0;
+
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Imagem grande do Pokémon */
+.modal-header img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.modal-header-info {
+  flex: 1;
+}
+
+.modal-header h2 {
+  margin: 0 0 10px 0;
+  font-size: 2em;
+}
+
+/* Conteúdo do modal */
+.modal-details {
+  padding: 30px;
+}
+
+/* Seções internas */
+.detail-section {
+  margin-bottom: 25px;
+}
+
+.detail-section h3 {
+  margin-bottom: 15px;
+  color: #333;
+
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.detail-section p {
+  margin: 10px 0;
+  font-size: 1em;
+  color: #555;
+}
+
+/* Habilidades */
+.abilities {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ability-badge {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Estatísticas */
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-name {
+  width: 150px;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #555;
+}
+
+.stat-bar-container {
+  flex: 1;
+  height: 20px;
+
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.stat-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+
+  transition: width 0.5s ease;
+}
+
+.stat-value {
+  width: 50px;
+  text-align: right;
+  font-weight: bold;
+  color: #555;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  .pokemon {
+    width: 150px;
+  }
+
+  .filter-container {
+    gap: 5px;
+  }
+
+  .filter-btn {
+    padding: 8px 15px;
+    font-size: 0.8em;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+
+  .modal-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .stat-name {
+    width: 100px;
+    font-size: 0.9em;
+  }
+}
